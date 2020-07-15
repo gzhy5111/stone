@@ -33,4 +33,10 @@ public class Token {
     public String getText() {
         return "";
     }
+    public int getNumber() {
+        // 这里如果像前面那样return “”，返回的是字符串类型。
+        // return 0也不合适，return -1也不行。因为他们都有可能是有效的字符串。我们没法用一个数字来表示程序运行状态。
+        // 所以我们只能抛异常，异常类的名字 MyException 是我们自己起的。
+        throw new RuntimeException("输入的字符不能为空！");
+    }
 }

@@ -222,6 +222,11 @@ public class Lexer {
         public String getText() {
             return Integer.toString(text);
         }
+
+        @Override
+        public int getNumber() {
+            return text;
+        }
     }
 
     /**

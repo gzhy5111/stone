@@ -15,14 +15,14 @@ public class ASTLeaf extends ASTree {
 
     // 初始化一个动态数组，名为empty
     ArrayList<ASTree> empty = new ArrayList<ASTree>();
-    // 构造Token的对象token
+    // 构造Token的对象token，供 token 方法使用。目的是暂存叶子节点中的 STRING 终结符
     Token token;
 
     /**
      * 叶子节点中不含有子节点，所以子节点个数返回0
      * @return
      */
-    int numChildren() {
+    public int numChildren() {
         return 0;
     }
 
@@ -50,6 +50,14 @@ public class ASTLeaf extends ASTree {
     @Override
     String location() {
         return "目前所在第 " + token.getLineNumber() + "行";
+    }
+
+    /**
+     * 在写 day5 的 StringLiteral 中的 value 方法时发现需要用的这个方法。所以现在新增。
+     * 功能：获取叶子节点中的非终结符。
+     */
+    public Token token() {
+        return token;
     }
 
     /**

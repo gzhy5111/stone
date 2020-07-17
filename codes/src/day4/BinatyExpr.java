@@ -6,11 +6,11 @@
  */
 package day4;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class BinatyExpr extends ASTList {
-    public BinatyExpr(ArrayList<ASTree> children) {
+    public BinatyExpr(List<ASTree> children) {
         super(children);
     }
 
@@ -25,8 +25,8 @@ public class BinatyExpr extends ASTList {
      * 运算符
      * @return
      */
-    ASTree operator() {
-        return child(1);
+    String operator() {
+        return ((ASTLeaf)child(1)).token().getText();
     }
 
     /**

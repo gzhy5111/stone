@@ -2,23 +2,23 @@
  * ASTList类是所有非叶子节点的父类
  */
 package day4;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ASTList extends ASTree {
-    public ASTList(ArrayList<ASTree> children) {
-        this.children = children;
+    // 用List存放子节点，注意奥，ASTList是个类，不是对象哦。
+    // 作用仅仅是存放某个节点以及这个结点下面的节点。
+    protected List<ASTree> children;
+    public ASTList(List<ASTree> list) {
+        children = list;
     }
-
-    // 用ArrayList存放子节点
-    ArrayList<ASTree> children = new ArrayList<ASTree>();
 
     /**
      * 返回第i个节点
      * @param i
      * @return
      */
-    ASTree child(int i) {
+    public ASTree child(int i) {
         return children.get(i);
     }
 
@@ -26,7 +26,7 @@ public class ASTList extends ASTree {
      * 返回子节点的个数
      * @return
      */
-    int numChildren() {
+    public int numChildren() {
         return children.size();
     }
 
@@ -47,13 +47,14 @@ public class ASTList extends ASTree {
         StringBuilder builder = new StringBuilder();
         // 因为要实现加括号，这里是第一步，我先加一个左括号。
         builder.append('(');
+        String sep = "";
         // foreach遍历方法，t是临时变量，遍历所有children动态数组（ArrayList）中的信息。
         for (ASTree t: children) {
-            builder.append("");
+            builder.append(sep);
+            sep = " ";
             builder.append(t.toString());
-            builder.append(" ");
         }
-        // 最后再加上右括号
+        // 最后再加上右括号返回
         builder.append(')');
         return builder.toString();
     }

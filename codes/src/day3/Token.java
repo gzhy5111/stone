@@ -4,7 +4,7 @@
  */
 package day3;
 
-public class Token {
+public abstract class Token {                               // 为什么加abstract？因为本类中后面有方法要被重写。所以本类定义为抽象类更合适。
     //实际的单词是Token类 子类的对象
     //Token类根据单词的类型 又定义了不同的子类
     //类型有：标识符、整型字面量和字符串字面量

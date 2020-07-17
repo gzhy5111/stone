@@ -23,7 +23,6 @@ public class Lexer {
     private LineNumberReader reader;
 
     /**
-     * @author 高志远
      * @methodsName Lexer
      * @desscription 构造函数 为了初始化 hasMore 和 reader 对象
      * @param r
@@ -34,7 +33,6 @@ public class Lexer {
     }
 
     /**
-     * @author:  高志远
      * @methodsName: read
      * @description: 主函数调用窗口后，写入的所有字符都会传到本函数，然后会判断队列是否存在
      * @param:
@@ -52,14 +50,26 @@ public class Lexer {
     }
 
     /**
-     * @author:  高志远
+     * peek(i)将会返回read方法即将返回的单词之后的第i个单词
+     * @return
+     */
+    public Token peek(int i) {
+        if (fillQueue(i)) {
+            return queue.get(i);
+        }
+        else {
+            return Token.EOF;
+        }
+    }
+
+    /**
      * @methodsName: fillQueue
      * @description: 首先判断行号是否大于队列长度，如果小于队列长度并且一行中存在字符的话，会交由 readLine() 方法处理一行中的所有字符。
      * @param:  i: 读取的行号
      * @return:  boolean
      * @throws:
      */
-    boolean fillQueue(int i) {
+    private boolean fillQueue(int i) {
         //i如果大于等于队列的长度，就会一直卡在这里
         while (i >= queue.size()) {
             //如果有字符
@@ -74,14 +84,13 @@ public class Lexer {
     }
 
     /**
-     * @auctor:  高志远
      * @methodsName:  readLine
      * @description:  读取一行所有字符、遍历整行匹配并发送到 addToken() 方法。
      * @param:
      * @return:  void
      * @throws:
      */
-    public void readLine() {
+    protected void readLine() {
         //先定义一个变量，用于处理该函数需要处理的，这一行的所有字符。
         String line = "";
         try {
@@ -122,14 +131,13 @@ public class Lexer {
     }
 
     /**
-     * @auctor:  高志远
      * @methodsName:  addToken
      * @description:  把一行源代码先初步筛选大的类别：标识符、整型字面量和字符串。
      * @param:
      * @return:
      * @throws:
      */
-    void addToken(int lineNo, Matcher matcher) {
+    protected void addToken(int lineNo, Matcher matcher) {
         //获取匹配的类型
         //当正则表达式包含多个group时,也就是含有多个’(pattern)’格式的子表达式时,它的分组索引(group number)是从1开始的,而group(0)代表了整个匹配的字符串.
         //标识符
@@ -151,14 +159,13 @@ public class Lexer {
     }
 
     /**
-     * @auctor:  高志远
      * @methodsName:  toStringLiteral
      * @description:  对字符串字面量做更细的筛选。
      * @param:
      * @return:
      * @throws:
      */
-    private String toStringLiteral(String s) {
+    protected String toStringLiteral(String s) {
         StringBuilder sb = new StringBuilder();
         int len = s.length() - 1;
         for (int i = 1; i < len; i++) {
@@ -179,13 +186,12 @@ public class Lexer {
 
     /* 重写Token类中的方法 */
     /**
-     * @author: 高志远
      * @className: IdToken
      * @packageName: day3
      * @description: 三个类分别都是Token的子类，通过子类中的重写函数，对外提供getText()方法供主函数文件使用。
      * @data:
      **/
-    class IdToken extends Token {
+    protected class IdToken extends Token {
         private String text;
         IdToken(int lineNo, String s) {
             super(lineNo);
@@ -201,13 +207,12 @@ public class Lexer {
     }
 
     /**
-     * @author: 高志远
      * @className: NumToken
      * @packageName: day3
      * @description: 三个类分别都是Token的子类，通过子类中的重写函数，对外提供getText()方法供主函数文件使用。
      * @data:
      **/
-    class NumToken extends Token {
+    protected class NumToken extends Token {
         int text;
         private int integer;
         NumToken(int lineNo, int integer) {
@@ -230,13 +235,12 @@ public class Lexer {
     }
 
     /**
-     * @author: 高志远
      * @className: StrToken
      * @packageName: day3
      * @description: 三个类分别都是Token的子类，通过子类中的重写函数，对外提供getText()方法供主函数文件使用。
      * @data:
      **/
-    class StrToken extends Token {
+    protected class StrToken extends Token {
         String text;
         private String str;
         StrToken(int lineNo, String str) {

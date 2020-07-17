@@ -1,7 +1,7 @@
 package day3;
 
 public class LexerRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException{
         //System.out.println("hello world!");
         Lexer l = new Lexer(new CodeDialog());
         //进入死循环 当 (t = l.read()) !=Token.EOF 时退出

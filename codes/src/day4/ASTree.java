@@ -17,7 +17,7 @@ public abstract class ASTree {
      * 返回子节点的个数
      * @return
      */
-    abstract int numChildren();
+    public abstract int numChildren();
 
     /**
      * 返回一个遍历所有子节点的迭代器
